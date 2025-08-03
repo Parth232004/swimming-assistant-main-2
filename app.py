@@ -36,7 +36,7 @@ with st.form("session_form"):
         }
         # Append to CSV file
         df = pd.read_csv(agent.session_file) if os.path.exists(agent.session_file) else pd.DataFrame()
-        df = df.append(new_session, ignore_index=True)
+        df = pd.concat([df, pd.DataFrame([new_session])], ignore_index=True)
         df.to_csv(agent.session_file, index=False)
         st.success("✅ Session saved successfully!")
 
